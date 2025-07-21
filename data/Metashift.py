@@ -224,6 +224,8 @@ class MetaDatasetCatDog(Dataset):
 
 
 
+
+    
 def get_transform_metashift(train):
     scale = 256.0 / 224.0
     target_resolution = (224, 224)
@@ -249,4 +251,18 @@ def get_transform_metashift(train):
             normalize
         ])
     return transform
+
+def get_metashift_loaders(path, batch_size):
+    loader_kwargs = {'batch_size': batch_size, 'num_workers': 4, 'pin_memory': False}
+
+    full_dataset = MetaDatasetCatDog(root_dir=path)
+    splits = ['train', 'val', 'test']
+    subsets = full_dataset.get_splits(splits=splits, train_frac=1.0)
+    train_data, val_data, test_data = [subsets[split] for split in splits]
+
+    train_loader = DataLoader(train_data, shuffle=True, **loader_kwargs)
+    test_loader = DataLoader(test_data, shuffle=False, **loader_kwargs)
+    val_loader = DataLoader(val_data, shuffle=False, **loader_kwargs)
+
+    return train_loader, val_loader, test_loader
 

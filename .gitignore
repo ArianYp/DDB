@@ -20,7 +20,12 @@ parts/
 sdist/
 var/
 langsegmentanything/
-data
+data/metashift/
+data/celeba/
+data/waterbirds/
+models/ERM-wb.model
+models/ERM-celeba.model
+models/ERM-metashift.pth
 wheels/
 share/python-wheels/
 *.egg-info/
@@ -132,6 +137,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+virtualenv/
 env/
 venv/
 ENV/

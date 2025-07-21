@@ -72,4 +72,58 @@ class CelebADataset(Dataset):
         return img, label, env
 
 
+def get_dataset (phase, root_dir, transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,0.5,0.5), (0.5, 0.5, 0.5))])):
+    dataset = CelebADataset(phase=phase, root_dir=root_dir, transform=transform)
+    return dataset
 
+def get_loader (root_dir, phase, transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,0.5,0.5), (0.5, 0.5, 0.5))]), batch_size = 32):
+    if phase == 'retrain':
+        dataset = get_dataset('train', root_dir, transform)
+        return DataLoader(dataset, batch_size=batch_size, shuffle=False, num_workers=4), dataset
+    else:
+        dataset = get_dataset(phase, root_dir, transform)
+        
+    return DataLoader(dataset, batch_size=batch_size, shuffle=True, num_workers=4)
+
+
+
+def get_transform_celeba(train):
+    orig_w = 178
+    orig_h = 218
+    orig_min_dim = min(orig_w, orig_h)
+    target_resolution = (224, 224)
+
+    if not train:
+        transform = transforms.Compose([
+            transforms.CenterCrop(orig_min_dim),
+            transforms.Resize(target_resolution),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        ])
+    else:
+        transform = transforms.Compose([
+            transforms.RandomResizedCrop(
+                target_resolution,
+                scale=(0.7, 1.0),
+                ratio=(1.0, 1.3333333333333333),
+                interpolation=2),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
+        ])
+
+    return transform
+
+def get_celeba_loaders(path, batch_size):
+    transforms_train = get_transform_celeba(True)
+    transforms_test = get_transform_celeba(False)
+
+    trainloader = get_loader(path, 'train', transform=transforms_train, batch_size=batch_size)
+    valloader = get_loader(path, 'val', transform=transforms_test, batch_size=batch_size)
+    testloader = get_loader(path, 'test', transform=transforms_test, batch_size=batch_size)
+    retrain_loader, rdset = get_loader(path, 'retrain', transform = transforms.Compose([
+          transforms.Resize((512, 512)),
+          transforms.ToTensor()
+      ]), batch_size=batch_size)
+
+    return trainloader, valloader, testloader
