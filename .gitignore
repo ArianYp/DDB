@@ -20,6 +20,7 @@ parts/
 sdist/
 var/
 langsegmentanything/
+data
 wheels/
 share/python-wheels/
 *.egg-info/

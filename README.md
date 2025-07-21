@@ -79,4 +79,13 @@ This will produce a learned embedding for the placeholder token (e.g., `<dog>`),
 Our project expects the `languagesegmentanything` folder containing the language segmentation model. You can obtain it by cloning the repository from [This Github repo](https://github.com/luca-medeiros/lang-segment-anything)
 
 
+## ERM Models
+
+The ERM models used in this project are available at the following link:
+[ERM Models - Google Drive](https://drive.google.com/drive/folders/1aVhJRmj4KUAHEjoYBuwNu1r_2g1Db8m?usp=drive_link)
+
+**Usage:**
+- Download the ERM models from the link above.
+- Place the downloaded files in the `models` folder of the project.
+
 ## Citation
