@@ -24,20 +24,39 @@ DDB achieves superior worst-group accuracy across multiple benchmarks compared t
 We follow the dataset implementation approach from the [DaC repository](https://github.com/fhn98/DaC/tree/release). Our code supports three datasets: MetaShift, Waterbirds, and CelebA.
 ### MetaShift
 
-- **Directory:** `data/metashifts`
-- Please download and extract the MetaShift dataset into the `data/metashift` directory. The dataset can be downloaded form [here](https://drive.usercontent.google.com/download?id=1WySOxBRkxAUlSokgZrC-0JaWZwcG5UMT&authuser=0).
+- **Directory:** `data/metashift`
+- Please download the MetaShift dataset into the `data/metashift` directory. The dataset can be downloaded form [here](https://drive.usercontent.google.com/download?id=1WySOxBRkxAUlSokgZrC-0JaWZwcG5UMT&authuser=0).
 
+/**
+ * Our code expects the following structure:
+ *
+ * - `data/metashift/MetaDatasetCatDog/train`
+ * - `data/metashift/MetaDatasetCatDog/test`
+ */
 ### Waterbirds
 
-- **Directory:** `data/waterbirds`
+- **Directory:** `data/waterbird_complete95_forest2water2`
 - Place the Waterbirds dataset in the `data/waterbird_complete95_forest2water2` directory. The dataset can be downloaded from [here](https://nlp.stanford.edu/data/dro/waterbird_complete95_forest2water2.tar.gz).
+
+/**
+ * Our code expects the following structure:
+ *
+ * - `data/waterbird_complete95_forest2water2`
+ * - `data/waterbird_complete95_forest2water2/metadata.csv`
+ */
 
 ### CelebA
 
 - **Directory:** `data/celeba`
-- The CelebA dataset should be stored in the `data/celeba` directory. The dataset can be downloaded from [here](https://www.kaggle.com/jessicali9530/celeba-dataset).
+- Place the Waterbirds dataset in the `data/celeba` directory. The dataset can be downloaded from [here](https://www.kaggle.com/jessicali9530/celeba-dataset).
 
-Refer to the DaC repository for further details on dataset preparation and structure.
+/**
+ * Our code expects the following structure:
+ * - `data/celeba/img_align_celeba`
+ * - `data/celeba/celeba_split.csv`
+ * - `data/celeba/list_attr_celeba.csv`
+ */
+
 ## Textual Inversion
 
 The textual inversion component is adapted from [Hugging Face Diffusers](https://github.com/huggingface/diffusers/blob/main/examples/textual_inversion/textual_inversion.py). This script allows you to learn a new token representing a specific visual concept (e.g., a dog) using your dataset.
