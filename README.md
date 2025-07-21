@@ -1,6 +1,6 @@
 # DDB: Diffusion Driven Balancing
 
-**Diffusion Driven Balancing (DDB)** is a technique to address spurious correlations in deep neural networks, particularly for image classification tasks. Standard Empirical Risk Minimization (ERM) models often rely on irrelevant features, leading to poor generalization on out-of-distribution data. DDB leverages text-to-image diffusion models to generate balanced training samples, reducing the model's dependence on spurious correlations.
+**Diffusion Driven Balancing (DDB)** is a technique to address spurious correlations in deep neural networks, particularly for image classification tasks. Standard Empirical Risk Minimization (ERM) models often rely on irrelevant features, leading to poor generalization on out-of-distribution data. DDB leverages text-to-image diffusion models to generate balanced training samples, reducing the model's dependence on spurious correlations. accepted at ICCV 2025 main conference.
 
 ## Abstract
 
@@ -47,3 +47,7 @@ accelerate launch textual_inversion.py \
     --output_dir="textual_inversion_dog"
 ```
 This will produce a learned embedding for the placeholder token (e.g., `<dog>`), which can be used in subsequent diffusion-based sample generation steps.
+
+## Language Segmentation Model
+
+Our project expects the `languagesegmentanything` folder containing the language segmentation model. You can obtain it by cloning the repository from [This Github repo] (https://github.com/luca-medeiros/lang-segment-anything)

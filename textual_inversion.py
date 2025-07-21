@@ -465,6 +465,7 @@ def parse_args():
 
     return args
 
+## The second template is added by us and was not in the original code
 
 imagenet_templates_small = [
     "a photo of a {} {}",
