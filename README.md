@@ -13,11 +13,6 @@ Deep neural networks trained with Empirical Risk Minimization (ERM) perform well
 - Prunes generated samples using model prediction probabilities and attribution scores.
 - Retrains ERM models on the augmented dataset for improved generalization.
 
-## Results
-
-DDB achieves superior worst-group accuracy across multiple benchmarks compared to existing state-of-the-art methods.
-
-## Citation
 
 ## Dataset
 
@@ -27,35 +22,29 @@ We follow the dataset implementation approach from the [DaC repository](https://
 - **Directory:** `data/metashift`
 - Please download the MetaShift dataset into the `data/metashift` directory. The dataset can be downloaded form [here](https://drive.usercontent.google.com/download?id=1WySOxBRkxAUlSokgZrC-0JaWZwcG5UMT&authuser=0).
 
-/**
- * Our code expects the following structure:
- *
- * - `data/metashift/MetaDatasetCatDog/train`
- * - `data/metashift/MetaDatasetCatDog/test`
- */
+Our code expects the following structure:
+ *  `data/metashift/MetaDatasetCatDog/train`
+ *  `data/metashift/MetaDatasetCatDog/test`
+
 ### Waterbirds
 
 - **Directory:** `data/waterbird_complete95_forest2water2`
 - Place the Waterbirds dataset in the `data/waterbird_complete95_forest2water2` directory. The dataset can be downloaded from [here](https://nlp.stanford.edu/data/dro/waterbird_complete95_forest2water2.tar.gz).
 
-/**
- * Our code expects the following structure:
- *
- * - `data/waterbird_complete95_forest2water2`
- * - `data/waterbird_complete95_forest2water2/metadata.csv`
- */
+Our code expects the following structure:
+
+ *  `data/waterbird_complete95_forest2water2`
+ *  `data/waterbird_complete95_forest2water2/metadata.csv`
 
 ### CelebA
 
 - **Directory:** `data/celeba`
 - Place the Waterbirds dataset in the `data/celeba` directory. The dataset can be downloaded from [here](https://www.kaggle.com/jessicali9530/celeba-dataset).
 
-/**
- * Our code expects the following structure:
- * - `data/celeba/img_align_celeba`
- * - `data/celeba/celeba_split.csv`
- * - `data/celeba/list_attr_celeba.csv`
- */
+Our code expects the following structure:
+ *  `data/celeba/img_align_celeba`
+ *  `data/celeba/celeba_split.csv`
+ *  `data/celeba/list_attr_celeba.csv`
 
 ## Textual Inversion
 
@@ -88,3 +77,6 @@ This will produce a learned embedding for the placeholder token (e.g., `<dog>`),
 ## Language Segmentation Model
 
 Our project expects the `languagesegmentanything` folder containing the language segmentation model. You can obtain it by cloning the repository from [This Github repo](https://github.com/luca-medeiros/lang-segment-anything)
+
+
+## Citation
