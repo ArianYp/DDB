@@ -82,7 +82,7 @@ Our project expects the `languagesegmentanything` folder containing the language
 ## ERM Models
 
 The ERM models used in this project are available at the following link:
-[ERM Models - Google Drive](https://drive.google.com/drive/folders/1aVhJRmj4KUAHEjoYBuwNu1r_2g1Db8m?usp=drive_link)
+[ERM Models - Google Drive](https://drive.google.com/drive/folders/1aVhJRmj4KUAHEjoYBuwNu1r_2g1Db8mG?usp=sharing)
 
 **Usage:**
 - Download the ERM models from the link above.
