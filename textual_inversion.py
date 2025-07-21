@@ -413,6 +413,14 @@ def parse_args():
             " and logging the images."
         ),
     )
+    parser.add_argument(
+        "--class_name",
+        type=str,
+        default='hair',
+        help=(
+            "The class name of the concept that is learned."
+        ),
+    )
     parser.add_argument("--local_rank", type=int, default=-1, help="For distributed training: local_rank")
     parser.add_argument(
         "--checkpointing_steps",
@@ -459,21 +467,21 @@ def parse_args():
 
 
 imagenet_templates_small = [
-    "a photo of a {} animal",
-    "a cropped photo of the {} animal",
-    "the photo of a {} animal",
-    "a dark photo of the {} animal",
-    "a photo of my {} animal",
-    "a photo of the cool {} animal",
-    "a close-up photo of a {} animal",
-    "a bright photo of the {} animal",
-    "a cropped photo of a {} animal",
-    "a photo of the {} animal",
-    "a photo of one {} animal",
-    "a close-up photo of the {} animal",
-    "a photo of a nice {} animal",
-    "a cropped photo of a {} animal",
-    "a good photo of a {} animal",
+    "a photo of a {} {}",
+    "a cropped photo of the {} {}",
+    "the photo of a {} {}",
+    "a dark photo of the {} {}",
+    "a photo of my {} {}",
+    "a photo of the cool {} {}",
+    "a close-up photo of a {} {}",
+    "a bright photo of the {} {}",
+    "a cropped photo of a {} {}",
+    "a photo of the {} {}",
+    "a photo of one {} {}",
+    "a close-up photo of the {} {}",
+    "a photo of a nice {} {}",
+    "a cropped photo of a {} {}",
+    "a good photo of a {} {}",
 ]
 
 imagenet_style_templates_small = [
@@ -550,7 +558,7 @@ class TextualInversionDataset(Dataset):
             image = image.convert("RGB")
 
         placeholder_string = self.placeholder_token
-        text = random.choice(self.templates).format(placeholder_string)
+        text = random.choice(self.templates).format(placeholder_string, args.class_name)
 
         example["input_ids"] = self.tokenizer(
             text,
