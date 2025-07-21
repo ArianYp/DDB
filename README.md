@@ -50,4 +50,4 @@ This will produce a learned embedding for the placeholder token (e.g., `<dog>`),
 
 ## Language Segmentation Model
 
-Our project expects the `languagesegmentanything` folder containing the language segmentation model. You can obtain it by cloning the repository from [This Github repo](https://github.com/luca-medeiros/lang-segment-anything).
+Our project expects the `languagesegmentanything` folder containing the language segmentation model. You can obtain it by cloning the repository from [This Github repo](https://github.com/luca-medeiros/lang-segment-anything)
