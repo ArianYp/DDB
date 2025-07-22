@@ -1,6 +1,6 @@
 # DDB: Diffusion Driven Balancing
 
-**Diffusion Driven Balancing (DDB)** This code is the implementation of the paper DDB: Difffusion Driven Balancing. Accepted at ICCV 2025 main conference.
+**Diffusion Driven Balancing (DDB)** This repository contains the official implementation of our ICCV 2025 main conference paper.
 
 ## Abstract
 
