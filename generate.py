@@ -56,7 +56,7 @@ class ResNet50(nn.Module):
 
 # ------------------- Core Pipeline -------------------
 
-def get_image_losses(dataloader, model):
+def get_image_losses(dataloader, model,label):
     model.eval()
     loss_fn = nn.CrossEntropyLoss()
     losses_label0, losses_label1 = [], []
@@ -70,7 +70,9 @@ def get_image_losses(dataloader, model):
                 losses_label0.append(entry)
             else:
                 losses_label1.append(entry)
-    return losses_label0, losses_label1
+    if label == 0:
+        return losses_label0
+    return losses_label1
 
 def save_lowest_loss_images(losses, label, k, output_dir):
     os.makedirs(output_dir, exist_ok=True)
@@ -163,15 +165,16 @@ def parse_args():
     parser.add_argument('--batch_size', type=int, default=64)
     parser.add_argument('--model_path', type=str, default='models/ERM-metashift.pth')
     parser.add_argument('--save_dir', type=str, default='new_data')
-    parser.add_argument('--textual_inversion', type=str, default='textual_inversion/token')
+    parser.add_argument('--textual_inversion', type=str, default='Textual_inversions/textual_inversion_cat')
     parser.add_argument('--prompt', type=str, default='a photo of a <cat> animal')
     parser.add_argument('--mask_prompt', type=str, default='animal.')
     parser.add_argument('--token', type=str, default='<cat>')
     parser.add_argument('--threshold', type=float, default=0.3)
     parser.add_argument('--device', type=str, default='cuda')
     parser.add_argument('--seed', type=int, default=42)
-    parser.add_argument('--k0', type=int, default=0, help='Number of images to generate for class 0')
-    parser.add_argument('--k1', type=int, default=0, help='Number of images to generate for class 1')
+    parser.add_argument('--label', type=int, default=0, help='Class label')
+    parser.add_argument('--k', type=int, default=300, help='Number of images to generate')
+
     return parser.parse_args()
 
 def main():
@@ -188,22 +191,19 @@ def main():
     model.device = device
     model.eval()
 
-    losses_label0, losses_label1 = get_image_losses(trainloader, model)
-    meta0 = save_lowest_loss_images(losses_label0, label=0, k=args.k0, output_dir="low_loss_class")
-    meta1 = save_lowest_loss_images(losses_label1, label=1, k=args.k1, output_dir="low_loss_class")
+    losses_label = get_image_losses(trainloader, model , label=args.label)
+    meta = save_lowest_loss_images(losses_label, label=args.label, k=args.k, output_dir="low_loss_class")
 
     lang_sam = LangSAM()
     pipe = StableDiffusionInpaintPipeline.from_pretrained(
         "stabilityai/stable-diffusion-2-inpainting", torch_dtype=torch.float16
     ).to(device)
     pipe.load_textual_inversion(args.textual_inversion, token=args.token)
-
-    for cl, meta in [(0, meta0), (1, meta1)]:
-        dset = RetrainerDataset(meta, args.transform)
-        loader = DataLoader(dset, batch_size=32, shuffle=False)
-        mean_softmax = get_mean_softmax(loader, model, cl)
-        out_csv = os.path.join(args.save_dir, f"metadata_cls{cl}.csv")
-        generate_and_prune(model, loader, lang_sam, pipe, args, cl, mean_softmax, out_csv)
+    dset = RetrainerDataset(meta, args.transform)
+    loader = DataLoader(dset, batch_size=32, shuffle=False)
+    mean_softmax = get_mean_softmax(loader, model, cl)
+    out_csv = os.path.join(args.save_dir, f"metadata_cls{cl}.csv")
+    generate_and_prune(model, loader, lang_sam, pipe, args, cl, mean_softmax, out_csv)
 
 if __name__ == "__main__":
     main()

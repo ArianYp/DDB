@@ -20,6 +20,7 @@ parts/
 sdist/
 var/
 langsegmentanything/
+Textual_inversions/
 data/metashift/
 data/celeba/
 data/waterbirds/
