@@ -8,6 +8,7 @@ cache/
 
 # Distribution / packaging
 .Python
+
 build/
 develop-eggs/
 dist/
@@ -19,14 +20,16 @@ lib64/
 parts/
 sdist/
 var/
+new_data/
 langsegmentanything/
 Textual_inversions/
 data/metashift/
 data/celeba/
 data/waterbirds/
-models/ERM-wb.model
+models/ERM-waterbirds.model
 models/ERM-celeba.model
 models/ERM-metashift.pth
+low_loss_class/
 wheels/
 share/python-wheels/
 *.egg-info/
@@ -85,6 +88,8 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+retrain.py
+*.ipynb
 
 # IPython
 profile_default/

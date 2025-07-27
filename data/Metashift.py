@@ -252,14 +252,17 @@ def get_transform_metashift(train):
         ])
     return transform
 
+def get_metashift_dataset(split,path,transform):
+    full_dataset = MetaDatasetCatDog(root_dir=path)
+    subsets = full_dataset.get_splits(splits=[split], train_frac=1.0)
+    dset = subsets[split]
+    return dset
+
 def get_metashift_loaders(path, batch_size):
     loader_kwargs = {'batch_size': batch_size, 'num_workers': 4, 'pin_memory': False}
-
-    full_dataset = MetaDatasetCatDog(root_dir=path)
-    splits = ['train', 'val', 'test']
-    subsets = full_dataset.get_splits(splits=splits, train_frac=1.0)
-    train_data, val_data, test_data = [subsets[split] for split in splits]
-
+    train_data = get_metashift_dataset('train', path, get_transform_metashift(train=True))
+    test_data = get_metashift_dataset('test', path, get_transform_metashift(train=False))
+    val_data = get_metashift_dataset('val',path, get_transform_metashift(train=False))
     train_loader = DataLoader(train_data, shuffle=True, **loader_kwargs)
     test_loader = DataLoader(test_data, shuffle=False, **loader_kwargs)
     val_loader = DataLoader(val_data, shuffle=False, **loader_kwargs)

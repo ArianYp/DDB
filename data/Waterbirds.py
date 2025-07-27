@@ -9,7 +9,6 @@ from PIL import Image
 from torch.utils.data import Dataset, DataLoader
 from torch.utils.data.distributed import DistributedSampler
 import random
-# Ignore warnings
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -18,7 +17,8 @@ class WaterbirdDataset(Dataset):
         self.split_dict = {
             'train': 0,
             'val': 1,
-            'test': 2
+            'test': 2,
+            'retrain': 0
         }
         self.env_dict = {
             (0, 0): torch.Tensor(np.array([1,0,0,0])),#Landbird with land background
@@ -34,6 +34,7 @@ class WaterbirdDataset(Dataset):
         self.metadata_df = pd.read_csv(
             os.path.join(self.dataset_dir, 'metadata.csv'))
         self.metadata_df = self.metadata_df[self.metadata_df['split']==self.split_dict[self.split]]
+
 
         y_array = torch.Tensor(np.array(self.metadata_df['y'].values)).type(torch.LongTensor)
         self.y_array = self.metadata_df['y'].values
@@ -67,14 +68,14 @@ def get_waterbird_dataloaders(path, batch_size):
     traindataset = WaterbirdDataset( split='train',path= path, transform = get_transform_waterbirds(train=True))
     valdataset = WaterbirdDataset( split='val',path= path, transform = get_transform_waterbirds(train=False))
     testdataset = WaterbirdDataset( split='test',path= path, transform = get_transform_waterbirds(train=False))
-    train_loadeer = DataLoader(dataset=traindataset, path= path, batch_size=batch_size, shuffle=True, **kwargs)
-    val_loader = DataLoader(dataset=valdataset, path= path, batch_size=batch_size, shuffle=False, **kwargs)
-    test_loader = DataLoader(dataset=testdataset, path= path, batch_size=batch_size, shuffle=False, **kwargs)
+    train_loadeer = DataLoader(dataset=traindataset,  batch_size=batch_size, shuffle=True, **kwargs)
+    val_loader = DataLoader(dataset=valdataset ,batch_size=batch_size, shuffle=False, **kwargs)
+    test_loader = DataLoader(dataset=testdataset, batch_size=batch_size, shuffle=False, **kwargs)
     return train_loadeer, val_loader, test_loader
 
 def get_waterbird_dataset(split,path, transform):
     dataset = WaterbirdDataset(split=split,path=path, transform = transform)
-    return dataseto
+    return dataset
 
 def get_transform_waterbirds(train):
     scale = 256.0/224.0
