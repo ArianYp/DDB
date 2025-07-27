@@ -77,7 +77,6 @@ Our project expects the `languagesegmentanything` folder containing the language
 The ERM models used in this project are available at the following link:
 [ERM Models - Google Drive](https://drive.google.com/drive/folders/1aVhJRmj4KUAHEjoYBuwNu1r_2g1Db8mG?usp=sharing)
 
-**Usage:**
 - Download the ERM models from the link above.
 - Place the downloaded files in the `models` folder of the project.
 
@@ -86,7 +85,7 @@ The ERM models used in this project are available at the following link:
 
 This script runs the DDB pipeline to generate counterfactual training samples using Stable Diffusion and LangSAM.
 
-### Steps
+### Usage
 
 1. Select low-loss samples of a target class from a trained ERM model.
 2. Segment the causal region (e.g., hair, bird) using LangSAM.
@@ -115,7 +114,7 @@ This script retrains the ERM model on the combined dataset of:
 - Original training samples
 - Generated counterfactuals (from `generate.py`) for both classes
 
-### Key Features
+### Usage
 
 - Loads a pretrained ResNet50 ERM model
 - Merges synthetic and real training samples
