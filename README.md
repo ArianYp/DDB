@@ -108,6 +108,22 @@ python generate.py \
   --save_dir generated_data/waterbirds-wb/
 ```
 
+
+### Arguments for `generate.py`
+
+| Argument              | Type     | Description                                                                 |
+|-----------------------|----------|-----------------------------------------------------------------------------|
+| `--dataset`           | `str`    | Dataset name: `celeba`, `waterbirds`, or `metashift`                        |
+| `--model_path`        | `str`    | Path to the pretrained ERM model                                            |
+| `--textual_inversion` | `str`    | Path to learned textual inversion embedding (e.g., `<waterbird>`)              |
+| `--prompt`            | `str`    | Prompt to guide the diffusion model (must include the learned token)       |
+| `--mask_prompt`       | `str`    | Language prompt used by LangSAM to extract causal mask (e.g., "bird")      |
+| `--token`             | `str`    | The learned placeholder token (e.g., `<waterbird>`)                             |
+| `--label`             | `int`    | Class label of initial samples (typically 0 or 1)                 |
+| `--k`                 | `int`    | Number of low-loss samples to generate new images from                      |
+| `--threshold`         | `float`  | Attribution score threshold for pruning generated images                    |
+| `--save_dir`          | `str`    | Directory to save generated images and their metadata                       |
+
 ### Retraining Pipeline (`train.py`)
 
 This script retrains the ERM model on the combined dataset of:
@@ -135,5 +151,20 @@ python train.py \
   --batch_size 32 \
   --output_dir checkpoints/
 ```
+
+### Arguments for `train.py`
+
+| Argument         | Type     | Description                                                                 |
+|------------------|----------|-----------------------------------------------------------------------------|
+| `--new_data`     | `str`    | Folder path to the generated data (with metadata CSVs)                      |
+| `--dataset`      | `str`    | Dataset name: `celeba`, `waterbirds`, or `metashift`                        |
+| `--model_path`   | `str`    | Path to the pretrained ERM model                                            |
+| `--gamma1`       | `float`  | Loss multiplier for class 0 counterfactuals                                 |
+| `--gamma2`       | `float`  | Loss multiplier for class 1 counterfactuals                                 |
+| `--lr`           | `float`  | Learning rate for optimizer                                                 |
+| `--epochs`       | `int`    | Number of epochs to retrain                                                 |
+| `--batch_size`   | `int`    | Batch size for retraining                                                   |
+| `--output_dir`   | `str`    | Directory to save best checkpoint (`best_model.pth`)                         |
+
 
 ## Citation
