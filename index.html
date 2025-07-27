@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,9 +12,16 @@
     .header-links { margin-bottom: 2rem; }
     .header-links a { margin-right: 1.5rem; font-weight: bold; }
     .teaser, .results, .method { margin-top: 2rem; }
-    img { max-width: 100%; height: auto; border: 1px solid #ddd; margin: 1rem 0; }
-    pre { background-color: #f4f4f4; padding: 1rem; overflow-x: auto; }
     .authors { font-size: 1.2rem; color: #444; }
+
+    .figure-wrapper { text-align: center; margin: 1.5rem 0; }
+    .figure-wrapper img {
+      width: 80%;
+      max-width: 600px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
   </style>
 </head>
 <body>
@@ -27,31 +33,32 @@
   <div class="header-links">
     <a href="https://github.com/ArianYp/DDB">Code</a>
     <a href="https://arxiv.org/abs/2503.17226">Paper</a>
-    
   </div>
 
   <div class="teaser">
     <h2>Abstract</h2>
-    <p>Deep neural networks trained with Empirical Risk Minimization (ERM) perform well when both training and test data come from the same domain, but they often fail to generalize to out-of-distribution samples. In image classification, these models may rely on spurious correlations that often exist between labels and irrelevant features of images, making predictions unreliable when those features do not exist.
-    We propose a Diffusion Driven Balancing (DDB) technique to generate training samples with text-to-image diffusion models to address the spurious correlation problem. Our method includes a textual inversion step to capture causal components, uses language-guided segmentation to isolate those features, and combines them with alternative contexts using a diffusion model. Samples are then filtered via confidence scores and attribution methods before retraining the ERM model for improved generalization.</p>
+    <p>
+      Deep neural networks trained with Empirical Risk Minimization (ERM) perform well when both training and test data come from the same domain, but they often fail to generalize to out-of-distribution samples. In image classification, these models may rely on spurious correlations that often exist between labels and irrelevant features of images, making predictions unreliable when those features do not exist.
+      We propose a Diffusion Driven Balancing (DDB) technique to generate training samples with text-to-image diffusion models to address the spurious correlation problem. Our method includes a textual inversion step to capture causal components, uses language-guided segmentation to isolate those features, and combines them with alternative contexts using a diffusion model. Samples are then filtered via confidence scores and attribution methods before retraining the ERM model for improved generalization.
+    </p>
   </div>
 
   <div class="method">
     <h2>Method Overview</h2>
-    <img src="Images/Figure2.png" alt="Method Overview">
+    <div class="figure-wrapper">
+      <img src="Images/Figure2.png" alt="Method Overview">
+    </div>
   </div>
 
   <div class="results">
     <h2>Qualitative Results</h2>
-    <img src="Images/Figure3.png" alt="Results Example">
-    <img src="Images/Figure4.png" alt="Results Example">
-    <img src="Images/Figure5.png" alt="Results Example">
-    <img src="Images/Figure6.png" alt="Results Example">
-    <img src="Images/Figure7.png" alt="Results Example">
-    <img src="Images/Figure8.png" alt="Results Example">
+    <div class="figure-wrapper"><img src="Images/Figure3.png" alt="Result 1"></div>
+    <div class="figure-wrapper"><img src="Images/Figure4.png" alt="Result 2"></div>
+    <div class="figure-wrapper"><img src="Images/Figure5.png" alt="Result 3"></div>
+    <div class="figure-wrapper"><img src="Images/Figure6.png" alt="Result 4"></div>
+    <div class="figure-wrapper"><img src="Images/Figure7.png" alt="Result 5"></div>
+    <div class="figure-wrapper"><img src="Images/Figure8.png" alt="Result 6"></div>
   </div>
-
-
 
 </body>
 </html>
