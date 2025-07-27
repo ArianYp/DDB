@@ -4,41 +4,53 @@
 <head>
   <meta charset="UTF-8">
   <title>DDB: Diffusion Driven Balancing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; max-width: 800px; }
-    img { max-width: 100%; }
-    pre { background: #f4f4f4; padding: 10px; overflow-x: auto; }
-    h1, h2, h3 { color: #333; }
-    .authors { font-size: 1.1em; color: #444; }
-    .nav a { margin-right: 15px; }
+    body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; max-width: 900px; margin-left: auto; margin-right: auto; }
+    h1, h2, h3 { color: #222; }
+    a { color: #007ACC; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .header-links { margin-bottom: 2rem; }
+    .header-links a { margin-right: 1.5rem; font-weight: bold; }
+    .teaser, .results, .method { margin-top: 2rem; }
+    img { max-width: 100%; height: auto; border: 1px solid #ddd; margin: 1rem 0; }
+    pre { background-color: #f4f4f4; padding: 1rem; overflow-x: auto; }
+    .authors { font-size: 1.2rem; color: #444; }
   </style>
 </head>
 <body>
-  <h1>DDB: Diffusion Driven Balancing</h1>
-  <p><strong>ICCV 2025</strong></p>
-  <p class="authors"><strong>Aryan Yazdan Parast</strong>, Basim Azam, Naveed Akhtar</p>
 
-  <div class="nav">
-    <a href="https://github.com/Arianyp/DDB">[Code]</a>
-    <a href="https://arxiv.org/abs/2503.17226">[Paper]</a>
+  <h1>DDB: Diffusion Driven Balancing</h1>
+  <p class="authors"><strong>Aryan Yazdan Parast</strong>, Basim Azam, Naveed Akhtar</p>
+  <p><strong>ICCV 2025</strong></p>
+
+  <div class="header-links">
+    <a href="https://github.com/ArianYp/DDB">Code</a>
+    <a href="https://arxiv.org/abs/2503.17226">Paper</a>
+    
   </div>
 
-  <img src="Images/Figure1.png" alt="Teaser image">
+  <div class="teaser">
+    <h2>Abstract</h2>
+    <p>Deep neural networks trained with Empirical Risk Minimization (ERM) perform well when both training and test data come from the same domain, but they often fail to generalize to out-of-distribution samples. In image classification, these models may rely on spurious correlations that often exist between labels and irrelevant features of images, making predictions unreliable when those features do not exist.</p>
+    <p>We propose a Diffusion Driven Balancing (DDB) technique to generate training samples with text-to-image diffusion models to address the spurious correlation problem. Our method includes a textual inversion step to capture causal components, uses language-guided segmentation to isolate those features, and combines them with alternative contexts using a diffusion model. Samples are then filtered via confidence scores and attribution methods before retraining the ERM model for improved generalization.</p>
+  </div>
 
-  <h2>Abstract</h2>
-  <p>Deep neural networks trained with Empirical Risk Minimization (ERM) perform well when both training and test data come from the same domain, but they often fail to generalize to out-of-distribution samples. In image classification, these models may rely on spurious correlations that often exist between labels and irrelevant features of images, making predictions unreliable when those features do not exist.</p>
-  <p>We propose a Diffusion Driven Balancing (DDB) technique to generate training samples with text-to-image diffusion models for addressing the spurious correlation problem. First, we compute the best describing token for the visual features pertaining to the causal components of samples by a textual inversion mechanism. Then, leveraging a language segmentation method and a diffusion model, we generate new samples by combining the causal component with the elements from other classes. We also meticulous...
+  <div class="method">
+    <h2>Method Overview</h2>
+    <img src="Images/Figure2.png" alt="Method Overview">
+  </div>
 
-  <h2>Method Overview</h2>
-  <img src="Images/Figure2.png" alt="Method diagram">
+  <div class="results">
+    <h2>Qualitative Results</h2>
+    <img src="Images/Figure3.png" alt="Results Example">
+    <img src="Images/Figure4.png" alt="Results Example">
+    <img src="Images/Figure5.png" alt="Results Example">
+    <img src="Images/Figure6.png" alt="Results Example">
+    <img src="Images/Figure7.png" alt="Results Example">
+    <img src="Images/Figure8.png" alt="Results Example">
+  </div>
 
-  <h2>Qualitative Results</h2>
-  <img src="Images/Figure3.png" alt="Results">
-  <img src="Images/Figure4.png" alt="Results">
-  <img src="Images/Figure5.png" alt="Results">
-  <img src="Images/Figure6.png" alt="Results">
-  <img src="Images/Figure7.png" alt="Results">
-  <img src="Images/Figure8.png" alt="Results">
 
 
 </body>
