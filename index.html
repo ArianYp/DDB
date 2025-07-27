@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +22,41 @@
       border: 1px solid #ddd;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .slideshow-container {
+      position: relative;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .slide {
+      display: none;
+    }
+
+    .prev, .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 10px;
+      margin-top: -22px;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      transition: 0.3s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    .prev:hover, .next:hover {
+      background-color: rgba(0,0,0,0.8);
     }
   </style>
 </head>
@@ -52,13 +88,38 @@
 
   <div class="results">
     <h2>Qualitative Results</h2>
-    <div class="figure-wrapper"><img src="Images/Figure3.png" alt="Result 1"></div>
-    <div class="figure-wrapper"><img src="Images/Figure4.png" alt="Result 2"></div>
-    <div class="figure-wrapper"><img src="Images/Figure5.png" alt="Result 3"></div>
-    <div class="figure-wrapper"><img src="Images/Figure6.png" alt="Result 4"></div>
-    <div class="figure-wrapper"><img src="Images/Figure7.png" alt="Result 5"></div>
-    <div class="figure-wrapper"><img src="Images/Figure8.png" alt="Result 6"></div>
+    <div class="slideshow-container">
+      <div class="slide"><img src="Images/Figure3.png" class="figure-wrapper"></div>
+      <div class="slide"><img src="Images/Figure4.png" class="figure-wrapper"></div>
+      <div class="slide"><img src="Images/Figure5.png" class="figure-wrapper"></div>
+      <div class="slide"><img src="Images/Figure6.png" class="figure-wrapper"></div>
+      <div class="slide"><img src="Images/Figure7.png" class="figure-wrapper"></div>
+      <div class="slide"><img src="Images/Figure8.png" class="figure-wrapper"></div>
+
+      <a class="prev" onclick="plusSlides(-1)">❮</a>
+      <a class="next" onclick="plusSlides(1)">❯</a>
+    </div>
   </div>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("slide");
+      if (n > slides.length) { slideIndex = 1 }
+      if (n < 1) { slideIndex = slides.length }
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[slideIndex - 1].style.display = "block";
+    }
+  </script>
 
 </body>
 </html>
