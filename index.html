@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DDB: Diffusion Driven Balancing</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; max-width: 800px; }
+    img { max-width: 100%; }
+    pre { background: #f4f4f4; padding: 10px; overflow-x: auto; }
+    h1, h2, h3 { color: #333; }
+    .authors { font-size: 1.1em; color: #444; }
+    .nav a { margin-right: 15px; }
+  </style>
+</head>
+<body>
+  <h1>DDB: Diffusion Driven Balancing</h1>
+  <p><strong>ICCV 2025</strong></p>
+  <p class="authors"><strong>Aryan Yazdan Parast</strong>, Basim Azam, Naveed Akhtar</p>
+
+  <div class="nav">
+    <a href="https://github.com/Arianyp/DDB">[Code]</a>
+    <a href="https://arxiv.org/abs/2503.17226">[Paper]</a>
+  </div>
+
+  <img src="Images/Figure1.png" alt="Teaser image">
+
+  <h2>Abstract</h2>
+  <p>Deep neural networks trained with Empirical Risk Minimization (ERM) perform well when both training and test data come from the same domain, but they often fail to generalize to out-of-distribution samples. In image classification, these models may rely on spurious correlations that often exist between labels and irrelevant features of images, making predictions unreliable when those features do not exist.</p>
+  <p>We propose a Diffusion Driven Balancing (DDB) technique to generate training samples with text-to-image diffusion models for addressing the spurious correlation problem. First, we compute the best describing token for the visual features pertaining to the causal components of samples by a textual inversion mechanism. Then, leveraging a language segmentation method and a diffusion model, we generate new samples by combining the causal component with the elements from other classes. We also meticulous...
+
+  <h2>Method Overview</h2>
+  <img src="Images/Figure2.png" alt="Method diagram">
+
+  <h2>Qualitative Results</h2>
+  <img src="Images/Figure3.png" alt="Results">
+  <img src="Images/Figure4.png" alt="Results">
+  <img src="Images/Figure5.png" alt="Results">
+  <img src="Images/Figure6.png" alt="Results">
+  <img src="Images/Figure7.png" alt="Results">
+  <img src="Images/Figure8.png" alt="Results">
+
+
+</body>
+</html>
