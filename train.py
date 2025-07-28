@@ -269,7 +269,9 @@ def run_retraining(args):
     print('learning rate:', args.lr)
     for i in range(args.epochs):
         retrain_cnn(merged_dataloader, cnn_image_encoder, opt,i,args,'cuda')
+        test_cnn(testloader, cnn_image_encoder, number_of_envs)
         _, acc = test_cnn(valloader, cnn_image_encoder, number_of_envs)
+        
         acc = min(acc)
         if acc > best_acc:
             best_acc = acc
@@ -289,9 +291,9 @@ if __name__ == "__main__":
     parser.add_argument("--gamma1", type=int, default=6)
     parser.add_argument("--gamma2", type=int, default=10)
     parser.add_argument("--lr", type=float, default=5e-6, help="Learning rate")
-    parser.add_argument("--epochs", type=int, default=60, help="Number of epochs to retrain")
+    parser.add_argument("--epochs", type=int, default=200, help="Number of epochs to retrain")
     parser.add_argument("--output_dir", type=str, default="./checkpoints", help="Directory to save checkpoints")
-    parser.add_argument('--model_path', type=str, default='models/ERM-wb.model')
+    parser.add_argument('--model_path', type=str, default='../DaC/Copy of 100resnet50_erm_ll.model')
     
     args = parser.parse_args()
     os.makedirs(args.output_dir, exist_ok=True)
