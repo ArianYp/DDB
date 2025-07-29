@@ -173,7 +173,7 @@ class RetrainerDataset(Dataset):
             (1, 1): torch.Tensor(np.array([0,0,0,2])),
         }
         y_array = torch.Tensor(np.array(self.metadata_df['label'].values)).type(torch.LongTensor)
-        
+
         self.y_array = self.metadata_df['label'].values
         self.filename_array = self.metadata_df['filename'].values
         self.env_array = self.metadata_df['place'].values
@@ -260,6 +260,7 @@ def run_retraining(args):
     weight_init(cnn_image_encoder.model.fc)
     for p in cnn_image_encoder.model.fc.parameters():
         p.requires_grad = True
+
     retrainerdset = RetrainerDataset(args.transform, f'{args.new_data}/metadata_cls0.csv')
     retrainerdset2 = RetrainerDataset(args.transform, f'{args.new_data}/metadata_cls1.csv')
     merged_dataset = ConcatDataset([retrainerdset,  traindset, retrainerdset2])
@@ -269,8 +270,7 @@ def run_retraining(args):
     print('learning rate:', args.lr)
     for i in range(args.epochs):
         retrain_cnn(merged_dataloader, cnn_image_encoder, opt,i,args,'cuda')
-        test_cnn(testloader, cnn_image_encoder, number_of_envs)
-        _, acc = test_cnn(valloader, cnn_image_encoder, number_of_envs)
+         _, acc = test_cnn(valloader, cnn_image_encoder, number_of_envs)
         
         acc = min(acc)
         if acc > best_acc:
