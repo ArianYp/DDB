@@ -171,11 +171,12 @@ python train.py \
 
 ## Citation
 
-@InProceedings{Parast_2025_ICCV,
+
+```@InProceedings{Parast_2025_ICCV,
     author    = {Parast, Aryan Yazdan and Azam, Basim and Akhtar, Naveed},
     title     = {DDB: Diffusion Driven Balancing to Address Spurious Correlations},
     booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
     month     = {October},
     year      = {2025},
     pages     = {17526-17535}
-}
+}```
